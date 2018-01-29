@@ -4,7 +4,9 @@ import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.AttributedString;
 import java.util.Arrays;
 import java.util.Collections;
@@ -180,10 +182,13 @@ public class PlayState extends GameState {
         options = new LinkedList<>();
         options.add(new TextOption(KeyEvent.VK_ENTER, "Continue", 1));
 
+
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("res/fonts/pkmndp.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getClassLoader().getResourceAsStream("pkmndp.ttf"));
             font = font.deriveFont(10F);
             biggerfont = font.deriveFont(15F);
+
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
         } catch (Exception e) {
             System.out.println("Error when loading Font");
         }

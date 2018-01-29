@@ -36,9 +36,11 @@ public class MenuState extends GameState {
         esc_button = imghandler.loadImage("imgs/buttons/Escape_button.png");
 
         try {
-            font = Font.createFont(Font.TRUETYPE_FONT, new FileInputStream("res/fonts/pkmndp.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, this.getClass().getClassLoader().getResourceAsStream("pkmndp.ttf"));
             font = font.deriveFont(16F);
-        } catch (Exception e){
+
+            GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(font);
+        } catch (Exception e) {
             System.out.println("Error when loading Font");
         }
     }
